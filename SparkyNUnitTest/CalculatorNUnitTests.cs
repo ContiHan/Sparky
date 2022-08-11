@@ -22,5 +22,31 @@ namespace Sparky
             // Assert
             Assert.AreEqual(30, result);
         }
+
+        [Test]
+        public void IsOddNumber_InputIntNumber_GetTrue()
+        {
+            // Arrange
+            Calculator calculator = new();
+
+            // Act
+            bool result = calculator.IsOddNumber(13);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void IsOddNumber_InputIntNumber_GetFalse()
+        {
+            // Arrange
+            Calculator calculator = new();
+
+            // Act
+            bool result = calculator.IsOddNumber(8);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
     }
 }
