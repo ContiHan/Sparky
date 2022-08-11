@@ -24,7 +24,7 @@ namespace Sparky
         }
 
         [Test]
-        public void IsOddNumber_InputIntNumber_GetTrue()
+        public void IsOddChecker_InputOddNumber_ReturnTrue()
         {
             // Arrange
             Calculator calculator = new();
@@ -37,7 +37,7 @@ namespace Sparky
         }
 
         [Test]
-        public void IsOddNumber_InputIntNumber_GetFalse()
+        public void IsOddChecker_InputEvenNumber_ReturnTrue()
         {
             // Arrange
             Calculator calculator = new();
