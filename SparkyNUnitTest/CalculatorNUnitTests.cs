@@ -33,11 +33,12 @@ namespace Sparky
             bool result = calculator.IsOddNumber(13);
 
             // Assert
-            Assert.IsTrue(result);
+            Assert.That(result, Is.EqualTo(true));
+            Assert.IsTrue(result); // Same logic different syntax
         }
 
         [Test]
-        public void IsOddChecker_InputEvenNumber_ReturnTrue()
+        public void IsOddChecker_InputEvenNumber_ReturnFalse()
         {
             // Arrange
             Calculator calculator = new();
@@ -46,7 +47,8 @@ namespace Sparky
             bool result = calculator.IsOddNumber(8);
 
             // Assert
-            Assert.IsFalse(result);
+            Assert.That(result, Is.EqualTo(false));
+            Assert.IsFalse(result); // Same logic different syntax
         }
     }
 }
