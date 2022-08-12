@@ -39,13 +39,17 @@ namespace Sparky
         }
 
         [Test]
-        public void IsOddChecker_InputEvenNumber_ReturnFalse()
+        [TestCase(8)]
+        [TestCase(10)]
+        [TestCase(20)]
+        [TestCase(100)]
+        public void IsOddChecker_InputEvenNumber_ReturnFalse(int a)
         {
             // Arrange
             Calculator calculator = new();
 
             // Act
-            bool result = calculator.IsOddNumber(8);
+            bool result = calculator.IsOddNumber(a);
 
             // Assert
             Assert.That(result, Is.EqualTo(false));
