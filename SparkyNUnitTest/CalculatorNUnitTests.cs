@@ -87,6 +87,12 @@ namespace Sparky
 
             // Assert
             Assert.That(result, Is.EquivalentTo(expectedOddRange));
+            Assert.That(result, Does.Contain(7));
+            Assert.That(result, Is.Not.Empty);
+            Assert.That(result.Count, Is.EqualTo(4));
+            Assert.That(result, Has.No.Member(6));
+            Assert.That(result, Is.Ordered);
+            Assert.That(result, Is.Unique);
         }
     }
 }
