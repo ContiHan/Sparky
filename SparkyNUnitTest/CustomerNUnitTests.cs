@@ -69,6 +69,15 @@ namespace Sparky
         [Test]
         public void GreetChecker_EmptyFirstName_ThrowsException()
         {
+            Assert.Throws<ArgumentException>(()=> customer.GreetAndCombine("","Solo"));
+
+            // Or with using That method
+            Assert.That(() => customer.GreetAndCombine("", "Solo"), Throws.ArgumentException);
+        }
+
+        [Test]
+        public void GreetChecker_EmptyFirstName_ThrowsExceptionMessage()
+        {
             var exceptionDetails = Assert.Throws<ArgumentException>(() => customer.GreetAndCombine("", "Solo"));
             Assert.AreEqual("Firstname is empty", exceptionDetails.Message);
 
