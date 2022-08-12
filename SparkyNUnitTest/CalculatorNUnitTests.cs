@@ -74,5 +74,19 @@ namespace Sparky
             Calculator calculator = new();
             return calculator.IsOddNumber(a);
         }
+
+        [Test]
+        public void OddRanger_InputMinAndMax_ResultValidOddNumberRange()
+        {
+            // Arrange
+            Calculator calculator = new();
+            List<int> expectedOddRange = new() { 1, 3, 5, 7 }; // Range 0 - 8
+
+            // Act
+            List<int> result = calculator.GetOddRange(0, 8);
+
+            // Assert
+            Assert.That(result, Is.EquivalentTo(expectedOddRange));
+        }
     }
 }
