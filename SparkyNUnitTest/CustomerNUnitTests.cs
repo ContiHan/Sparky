@@ -10,11 +10,18 @@ namespace Sparky
     [TestFixture]
     public class CustomerNUnitTests
     {
+        private Customer customer;
+
+        [SetUp]
+        public void Setup()
+        {
+            customer = new Customer();
+        }
+
         [Test]
         public void CombineName_InputFirstAndLastName_ReturnGreetedCombinedName()
         {
             // Arrange
-            Customer customer = new();
 
             // Act
             customer.GreetAndCombine("Han", "Solo");
@@ -33,7 +40,6 @@ namespace Sparky
         public void GreetMessage_NotGreeted_ReturnsNull()
         {
             // Arrange
-            Customer customer = new();
 
             // Act
 
