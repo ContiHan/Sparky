@@ -25,6 +25,17 @@ namespace Sparky
         }
 
         [Test]
+        [TestCase(5.4, 7.3)] // 12.7
+        [TestCase(5.42, 7.32)] // 12.74
+        [TestCase(5.48, 7.38)] // 12.86
+        public void AddNumbersDouble_InputTwoDouble_GetCorrectAddition(double a, double b)
+        {
+            Calculator calculator = new();
+            double result = calculator.AddNumbersDouble(a, b);
+            Assert.AreEqual(12.7, result, 1);
+        }
+
+        [Test]
         public void IsOddChecker_InputOddNumber_ReturnTrue()
         {
             // Arrange
