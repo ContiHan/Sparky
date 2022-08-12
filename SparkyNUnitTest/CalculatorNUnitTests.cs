@@ -20,7 +20,7 @@ namespace Sparky
             int result = calculator.AddNumbers(10, 20);
 
             // Assert
-            Assert.That(30, Is.EqualTo(result)); // more used syntax
+            Assert.That(result, Is.EqualTo(30)); // more used syntax
             Assert.AreEqual(30, result); // Same logic different syntax
         }
 
@@ -32,7 +32,7 @@ namespace Sparky
         {
             Calculator calculator = new();
             double result = calculator.AddNumbersDouble(a, b);
-            Assert.AreEqual(12.7, result, 1);
+            Assert.AreEqual(12.7, result, .2);
         }
 
         [Test]
