@@ -72,10 +72,14 @@ namespace Sparky
         }
 
         [Test]
+        [TestCase(95, 90, ExpectedResult = "A")]
+        [TestCase(85, 90, ExpectedResult = "B")]
+        [TestCase(65, 90, ExpectedResult = "C")]
+        [TestCase(95, 65, ExpectedResult = "B")]
         [TestCase(95, 55, ExpectedResult = "F")]
         [TestCase(65, 55, ExpectedResult = "F")]
         [TestCase(50, 90, ExpectedResult = "F")]
-        public string gradeChecker_InputFailureScenario_ReturnExpectedGradeF(int score, int attendance)
+        public string gradeChecker_InputDifferentScenarios_ReturnExpectedGrade(int score, int attendance)
         {
             gradingCalculator.Score = score;
             gradingCalculator.AttendancePercentage = attendance;
