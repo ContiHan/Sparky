@@ -1,0 +1,86 @@
+﻿using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Sparky
+{
+    [TestFixture]
+    public class GradingCalculatorNUnitTests
+    {
+        private GradingCalculator gradingCalculator;
+
+        [SetUp]
+        public void Setup()
+        {
+            gradingCalculator = new GradingCalculator();
+        }
+
+        [Test]
+        public void gradeChecker_InputScore95Attendance90_ReturnGradeA()
+        {
+            gradingCalculator.Score = 95;
+            gradingCalculator.AttendancePercentage = 90;
+            var gradeResult = gradingCalculator.GetGrade();
+
+            Assert.That(gradeResult, Is.EqualTo("A"));
+        }
+
+        [Test]
+        public void gradeChecker_InputScore85Attendance90_ReturnGradeB()
+        {
+            gradingCalculator.Score = 85;
+            gradingCalculator.AttendancePercentage = 90;
+            var gradeResult = gradingCalculator.GetGrade();
+
+            Assert.That(gradeResult, Is.EqualTo("B"));
+        }
+
+        [Test]
+        public void gradeChecker_InputScore65Attendance90_ReturnGradeC()
+        {
+            gradingCalculator.Score = 65;
+            gradingCalculator.AttendancePercentage = 90;
+            var gradeResult = gradingCalculator.GetGrade();
+
+            Assert.That(gradeResult, Is.EqualTo("C"));
+        }
+
+        [Test]
+        public void gradeChecker_InputScore95Attendance65_ReturnGradeB()
+        {
+            gradingCalculator.Score = 95;
+            gradingCalculator.AttendancePercentage = 65;
+            var gradeResult = gradingCalculator.GetGrade();
+
+            Assert.That(gradeResult, Is.EqualTo("B"));
+        }
+
+        [Test]
+        [TestCase(95, 55)]
+        [TestCase(65, 55)]
+        [TestCase(50, 90)]
+        public void gradeChecker_InputFailureScenario_ReturnGradeF(int score, int attendance)
+        {
+            gradingCalculator.Score = score;
+            gradingCalculator.AttendancePercentage = attendance;
+            var gradeResult = gradingCalculator.GetGrade();
+
+            Assert.That(gradeResult, Is.EqualTo("F"));
+        }
+
+        [Test]
+        [TestCase(95, 55, ExpectedResult = "F")]
+        [TestCase(65, 55, ExpectedResult = "F")]
+        [TestCase(50, 90, ExpectedResult = "F")]
+        public string gradeChecker_InputFailureScenario_ReturnExpectedGradeF(int score, int attendance)
+        {
+            gradingCalculator.Score = score;
+            gradingCalculator.AttendancePercentage = attendance;
+
+            return gradingCalculator.GetGrade();
+        }
+    }
+}
