@@ -8,15 +8,19 @@ namespace Sparky
 {
     public class BankAccount
     {
+        private readonly ILogBook _logBook;
+
         public int Balance { get; set; }
 
-        public BankAccount()
+        public BankAccount(ILogBook logBook)
         {
             Balance = 0;
+            _logBook = logBook;
         }
 
         public bool Deposit(int amount)
         {
+            _logBook.Message("Deposit invoked");
             Balance += amount;
             return true;
         }
