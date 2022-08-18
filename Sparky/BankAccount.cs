@@ -10,7 +10,7 @@ namespace Sparky
     {
         private readonly ILogBook _logBook;
 
-        public int Balance { get; set; }
+        private int Balance { get; set; }
 
         public BankAccount(ILogBook logBook)
         {
