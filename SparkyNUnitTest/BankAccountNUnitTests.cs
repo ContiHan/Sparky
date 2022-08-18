@@ -62,7 +62,6 @@ namespace Sparky
         public void BankWithdraw_Withdraw300WithBalance200_ReturnsFalse()
         {
             var logMock = new Mock<ILogBook>();
-
             // Dont need this LogToDb setup
             //logMock.Setup(l => l.LogToDb(It.IsAny<string>())).Returns(true);
             logMock.Setup(l => l.LogBalanceAfterWithdrawal(It.IsInRange<int>(int.MinValue, -1, Moq.Range.Inclusive))).Returns(false);
@@ -72,6 +71,16 @@ namespace Sparky
             var withdrawResult = bankAccount.Withdraw(300);
 
             Assert.That(withdrawResult, Is.EqualTo(false));
+        }
+
+        [Test]
+        public void BankLogDummy_LogMockString_ReturnDesiredString()
+        {
+            var logMock = new Mock<ILogBook>();
+            var desiredOutput = "hello";
+            logMock.Setup(l => l.MessageWithReturnStr(It.IsAny<string>())).Returns((string str) => str.ToLower());
+
+            Assert.That(logMock.Object.MessageWithReturnStr("HELLo"), Is.EqualTo(desiredOutput));
         }
     }
 }
