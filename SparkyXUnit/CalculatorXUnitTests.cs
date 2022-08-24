@@ -1,91 +1,90 @@
-﻿//namespace Sparky
-//{
-//    [TestFixture]
-//    public class CalculatorXUnitTests
-//    {
-//        [Test]
-//        public void AddNumbers_InputTwoInt_GetCorrectAddition()
-//        {
-//            // Arrange
-//            Calculator calculator = new();
+﻿using Xunit;
 
-//            // Act
-//            int result = calculator.AddNumbers(10, 20);
+namespace Sparky
+{
+    public class CalculatorXUnitTests
+    {
+        [Fact]
+        public void AddNumbers_InputTwoInt_GetCorrectAddition()
+        {
+            // Arrange
+            Calculator calculator = new();
 
-//            // Assert
-//            Assert.That(result, Is.EqualTo(30)); // more used syntax
-//            Assert.AreEqual(30, result); // Same logic different syntax
-//        }
+            // Act
+            int result = calculator.AddNumbers(10, 20);
 
-//        [Test]
-//        [TestCase(5.4, 7.3)] // 12.7
-//        [TestCase(5.42, 7.32)] // 12.74
-//        [TestCase(5.48, 7.38)] // 12.86
-//        public void AddNumbersDouble_InputTwoDouble_GetCorrectAddition(double a, double b)
-//        {
-//            Calculator calculator = new();
-//            double result = calculator.AddNumbersDouble(a, b);
-//            Assert.AreEqual(12.7, result, .2);
-//        }
+            // Assert
+            Assert.Equal(30, result);
+        }
 
-//        [Test]
-//        public void IsOddChecker_InputOddNumber_ReturnTrue()
-//        {
-//            // Arrange
-//            Calculator calculator = new();
+        [Theory]
+        [InlineData(5.4, 7.3)] // 12.7
+        [InlineData(5.42, 7.32)] // 12.74
+        [InlineData(5.48, 7.38)] // 12.86
+        public void AddNumbersDouble_InputTwoDouble_GetCorrectAddition(double a, double b)
+        {
+            Calculator calculator = new();
+            double result = calculator.AddNumbersDouble(a, b);
+            Assert.Equal(12.7, result, .2);
+        }
 
-//            // Act
-//            bool result = calculator.IsOddNumber(13);
+        [Fact]
+        public void IsOddChecker_InputOddNumber_ReturnTrue()
+        {
+            // Arrange
+            Calculator calculator = new();
 
-//            // Assert
-//            Assert.That(result, Is.EqualTo(true));
-//            Assert.IsTrue(result); // Same logic different syntax
-//        }
+            // Act
+            bool result = calculator.IsOddNumber(13);
 
-//        [Test]
-//        [TestCase(8)]
-//        [TestCase(10)]
-//        [TestCase(100)]
-//        public void IsOddChecker_InputEvenNumber_ReturnFalse(int a)
-//        {
-//            // Arrange
-//            Calculator calculator = new();
+            // Assert
+            Assert.True(result);
+        }
 
-//            // Act
-//            bool result = calculator.IsOddNumber(a);
+        [Theory]
+        [InlineData(8)]
+        [InlineData(10)]
+        [InlineData(100)]
+        public void IsOddChecker_InputEvenNumber_ReturnFalse(int a)
+        {
+            // Arrange
+            Calculator calculator = new();
 
-//            // Assert
-//            Assert.That(result, Is.EqualTo(false));
-//            Assert.IsFalse(result); // Same logic different syntax
-//        }
+            // Act
+            bool result = calculator.IsOddNumber(a);
 
-//        [Test]
-//        [TestCase(10, ExpectedResult = false)]
-//        [TestCase(11, ExpectedResult = true)]
-//        public bool IsOddChecker_InputNumber_ReturnTrueIfOdd(int a)
-//        {
-//            Calculator calculator = new();
-//            return calculator.IsOddNumber(a);
-//        }
+            // Assert
+            Assert.False(result);
+        }
 
-//        [Test]
-//        public void OddRanger_InputMinAndMax_ResultValidOddNumberRange()
-//        {
-//            // Arrange
-//            Calculator calculator = new();
-//            List<int> expectedOddRange = new() { 1, 3, 5, 7 }; // Range 0 - 8
+        [Theory]
+        [InlineData(10, false)]
+        [InlineData(11, true)]
+        public void IsOddChecker_InputNumber_ReturnTrueIfOdd(int a, bool expectedResult)
+        {
+            Calculator calculator = new();
+            var actualResult = calculator.IsOddNumber(a);
+            Assert.Equal(expectedResult, actualResult);
+        }
 
-//            // Act
-//            List<int> result = calculator.GetOddRange(0, 8);
+        [Fact]
+        public void OddRanger_InputMinAndMax_ResultValidOddNumberRange()
+        {
+            // Arrange
+            Calculator calculator = new();
+            List<int> expectedOddRange = new() { 1, 3, 5, 7 }; // Range 0 - 8
 
-//            // Assert
-//            Assert.That(result, Is.EquivalentTo(expectedOddRange));
-//            Assert.That(result, Does.Contain(7));
-//            Assert.That(result, Is.Not.Empty);
-//            Assert.That(result.Count, Is.EqualTo(4));
-//            Assert.That(result, Has.No.Member(6));
-//            Assert.That(result, Is.Ordered);
-//            Assert.That(result, Is.Unique);
-//        }
-//    }
-//}
+            // Act
+            List<int> result = calculator.GetOddRange(0, 8);
+
+            // Assert
+            Assert.Equal(expectedOddRange, result);
+            Assert.Contains(7, result);
+            Assert.NotEmpty(result);
+            Assert.Equal(4, result.Count);
+            Assert.DoesNotContain(6, result);
+            Assert.Equal(result.OrderBy(r => r), result);
+            Assert.Equal(result.Distinct().Count(), result.Count);
+        }
+    }
+}
