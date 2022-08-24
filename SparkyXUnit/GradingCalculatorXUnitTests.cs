@@ -1,83 +1,85 @@
-﻿//namespace Sparky
-//{
-//    [TestFixture]
-//    public class GradingCalculatorXUnitTests
-//    {
-//        private GradingCalculator gradingCalculator;
+﻿using Xunit;
 
-//        [SetUp]
-//        public void Setup()
-//        {
-//            gradingCalculator = new GradingCalculator();
-//        }
+namespace Sparky
+{
+    public class GradingCalculatorXUnitTests
+    {
+        private readonly GradingCalculator gradingCalculator;
 
-//        [Test]
-//        public void gradeChecker_InputScore95Attendance90_ReturnGradeA()
-//        {
-//            gradingCalculator.Score = 95;
-//            gradingCalculator.AttendancePercentage = 90;
-//            var gradeResult = gradingCalculator.GetGrade();
+        public GradingCalculatorXUnitTests()
+        {
+            gradingCalculator = new GradingCalculator();
+        }
 
-//            Assert.That(gradeResult, Is.EqualTo("A"));
-//        }
+        [Fact]
+        public void gradeChecker_InputScore95Attendance90_ReturnGradeA()
+        {
+            gradingCalculator.Score = 95;
+            gradingCalculator.AttendancePercentage = 90;
+            var gradeResult = gradingCalculator.GetGrade();
 
-//        [Test]
-//        public void gradeChecker_InputScore85Attendance90_ReturnGradeB()
-//        {
-//            gradingCalculator.Score = 85;
-//            gradingCalculator.AttendancePercentage = 90;
-//            var gradeResult = gradingCalculator.GetGrade();
+            Assert.Equal("A", gradeResult);
+        }
 
-//            Assert.That(gradeResult, Is.EqualTo("B"));
-//        }
+        [Fact]
+        public void gradeChecker_InputScore85Attendance90_ReturnGradeB()
+        {
+            gradingCalculator.Score = 85;
+            gradingCalculator.AttendancePercentage = 90;
+            var gradeResult = gradingCalculator.GetGrade();
 
-//        [Test]
-//        public void gradeChecker_InputScore65Attendance90_ReturnGradeC()
-//        {
-//            gradingCalculator.Score = 65;
-//            gradingCalculator.AttendancePercentage = 90;
-//            var gradeResult = gradingCalculator.GetGrade();
+            Assert.Equal("B", gradeResult);
+        }
 
-//            Assert.That(gradeResult, Is.EqualTo("C"));
-//        }
+        [Fact]
+        public void gradeChecker_InputScore65Attendance90_ReturnGradeC()
+        {
+            gradingCalculator.Score = 65;
+            gradingCalculator.AttendancePercentage = 90;
+            var gradeResult = gradingCalculator.GetGrade();
 
-//        [Test]
-//        public void gradeChecker_InputScore95Attendance65_ReturnGradeB()
-//        {
-//            gradingCalculator.Score = 95;
-//            gradingCalculator.AttendancePercentage = 65;
-//            var gradeResult = gradingCalculator.GetGrade();
+            Assert.Equal("C", gradeResult);
+        }
 
-//            Assert.That(gradeResult, Is.EqualTo("B"));
-//        }
+        [Fact]
+        public void gradeChecker_InputScore95Attendance65_ReturnGradeB()
+        {
+            gradingCalculator.Score = 95;
+            gradingCalculator.AttendancePercentage = 65;
+            var gradeResult = gradingCalculator.GetGrade();
 
-//        [Test]
-//        [TestCase(95, 55)]
-//        [TestCase(65, 55)]
-//        [TestCase(50, 90)]
-//        public void gradeChecker_InputFailureScenario_ReturnGradeF(int score, int attendance)
-//        {
-//            gradingCalculator.Score = score;
-//            gradingCalculator.AttendancePercentage = attendance;
-//            var gradeResult = gradingCalculator.GetGrade();
+            Assert.Equal("B", gradeResult);
+        }
 
-//            Assert.That(gradeResult, Is.EqualTo("F"));
-//        }
+        [Theory]
+        [InlineData(95, 55)]
+        [InlineData(65, 55)]
+        [InlineData(50, 90)]
+        public void gradeChecker_InputFailureScenario_ReturnGradeF(int score, int attendance)
+        {
+            gradingCalculator.Score = score;
+            gradingCalculator.AttendancePercentage = attendance;
+            var gradeResult = gradingCalculator.GetGrade();
 
-//        [Test]
-//        [TestCase(95, 90, ExpectedResult = "A")]
-//        [TestCase(85, 90, ExpectedResult = "B")]
-//        [TestCase(65, 90, ExpectedResult = "C")]
-//        [TestCase(95, 65, ExpectedResult = "B")]
-//        [TestCase(95, 55, ExpectedResult = "F")]
-//        [TestCase(65, 55, ExpectedResult = "F")]
-//        [TestCase(50, 90, ExpectedResult = "F")]
-//        public string gradeChecker_InputDifferentScenarios_ReturnExpectedGrade(int score, int attendance)
-//        {
-//            gradingCalculator.Score = score;
-//            gradingCalculator.AttendancePercentage = attendance;
+            Assert.Equal("F", gradeResult);
+        }
 
-//            return gradingCalculator.GetGrade();
-//        }
-//    }
-//}
+        [Theory]
+        [InlineData(95, 90, "A")]
+        [InlineData(85, 90, "B")]
+        [InlineData(65, 90, "C")]
+        [InlineData(95, 65, "B")]
+        [InlineData(95, 55, "F")]
+        [InlineData(65, 55, "F")]
+        [InlineData(50, 90, "F")]
+        public void gradeChecker_InputDifferentScenarios_ReturnExpectedGrade(int score, int attendance, string expectedResult)
+        {
+            gradingCalculator.Score = score;
+            gradingCalculator.AttendancePercentage = attendance;
+
+            var actualResult = gradingCalculator.GetGrade();
+
+            Assert.Equal(expectedResult, actualResult);
+        }
+    }
+}
